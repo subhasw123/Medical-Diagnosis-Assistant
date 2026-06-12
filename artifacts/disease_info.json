@@ -1,0 +1,28 @@
+{
+  "panic disorder": {
+    "description": "A mental health condition characterized by sudden episodes of intense fear and panic.",
+    "advice": [
+      "Consult a mental health professional",
+      "Practice relaxation techniques",
+      "Maintain a healthy sleep schedule"
+    ]
+  },
+
+  "depression": {
+    "description": "A mood disorder causing persistent feelings of sadness and loss of interest.",
+    "advice": [
+      "Seek professional counseling",
+      "Exercise regularly",
+      "Stay socially connected"
+    ]
+  },
+
+  "anxiety state": {
+    "description": "A condition involving excessive worry, nervousness, or fear.",
+    "advice": [
+      "Practice stress management",
+      "Limit caffeine intake",
+      "Consult a healthcare professional"
+    ]
+  }
+}

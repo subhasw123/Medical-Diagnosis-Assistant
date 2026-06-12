@@ -1,0 +1,17 @@
+# Dataset
+dataset/
+
+# Models
+ml/models/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
