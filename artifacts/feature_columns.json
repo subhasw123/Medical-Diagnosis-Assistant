@@ -1,0 +1,11 @@
+{
+  "feature_columns": [
+    "age",
+    "gender",
+    "fever",
+    "cough",
+    "headache",
+    "shortness_of_breath",
+    "fatigue"
+  ]
+}
