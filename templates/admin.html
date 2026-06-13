@@ -1,6 +1,37 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
 
-{% block content %}
-  <h1>Admin Dashboard</h1>
-  <p>System status and controls will be available here.</p>
-{% endblock %}
+<h1>Admin Login</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+    >
+
+    <br><br>
+
+    <button type="submit">
+        Login
+    </button>
+
+</form>
+
+</body>
+</html>
