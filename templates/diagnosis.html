@@ -250,5 +250,34 @@
 <script src="/static/js/diagnosis.js"></script>
 <div id="result-container"></div>
 
+<hr>
+
+<h2>Medical AI Chatbot</h2>
+
+<div id="chat-box"
+     style="
+        height:300px;
+        overflow-y:auto;
+        border:1px solid #ddd;
+        padding:10px;
+        margin-bottom:10px;
+        background:#f9f9f9;
+     ">
+</div>
+
+<input
+    type="text"
+    id="chat-input"
+    placeholder="Ask a medical question..."
+    style="width:80%;padding:10px;"
+>
+
+<button
+    type="button"
+    onclick="sendMessage()"
+>
+    Send
+</button>
+
 </body>
 </html>
