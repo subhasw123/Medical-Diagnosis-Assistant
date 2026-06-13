@@ -7,6 +7,7 @@ from services.diagnosis_service import (
     create_feature_vector
 )
 from routes.diagnosis_routes import diagnosis_bp
+from routes.chatbot_routes import chatbot_bp
 
 app = Flask(__name__)
 
@@ -18,6 +19,10 @@ def home():
     return render_template(
         "diagnosis.html"
     )
+
+app.register_blueprint(
+    chatbot_bp
+)
 
 @app.route("/predict", methods=["POST"])
 def predict():

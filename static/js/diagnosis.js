@@ -251,3 +251,58 @@ function removeSymptom(symptom) {
 
     updateSelectedSymptomsDisplay();
 }
+async function sendMessage() {
+
+    const input =
+        document.getElementById(
+            "chat-input"
+        );
+
+    const question =
+        input.value.trim();
+
+    if (!question) return;
+
+    const chatBox =
+        document.getElementById(
+            "chat-box"
+        );
+
+    chatBox.innerHTML += `
+        <div>
+            <b>You:</b>
+            ${question}
+        </div>
+    `;
+
+    input.value = "";
+
+    const response =
+        await fetch(
+            "/chatbot/ask",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+                body: JSON.stringify({
+                    question: question
+                })
+            }
+        );
+
+    const data =
+        await response.json();
+
+    chatBox.innerHTML += `
+        <div style="margin-top:10px;">
+            <b>AI:</b>
+            ${data.answer}
+        </div>
+        <hr>
+    `;
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+}
