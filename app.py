@@ -8,11 +8,16 @@ from services.diagnosis_service import (
 )
 from routes.diagnosis_routes import diagnosis_bp
 from routes.chatbot_routes import chatbot_bp
+from routes.admin_routes import admin_bp
 
 app = Flask(__name__)
 
+
+app.secret_key = "medical_diagnosis_secret"
+
 # Register blueprints
 app.register_blueprint(diagnosis_bp)
+app.register_blueprint(admin_bp)
 
 @app.route("/")
 def home():
