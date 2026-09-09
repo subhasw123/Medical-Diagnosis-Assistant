@@ -29,13 +29,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # Train
 model = RandomForestClassifier(
-    n_estimators=100,
-    max_depth=20,
-    min_samples_leaf=4,
+    n_estimators=80,
+    max_depth=18,
+    min_samples_leaf=3,
+    max_features="sqrt",
     random_state=42,
     n_jobs=1
 )
-
 model.fit(X_train, y_train)
 
 # Evaluate
@@ -51,7 +51,8 @@ print("Accuracy:", accuracy)
 # Save model
 joblib.dump(
     model,
-    "ml/models/disease_model.pkl"
+    "ml/models/disease_model.pkl",
+    compress=3
 )
 
 joblib.dump(
