@@ -17,6 +17,15 @@
     ]
   },
 
+  "anxiety": {
+    "description": "A condition involving excessive worry, nervousness, or fear.",
+    "advice": [
+      "Practice stress management",
+      "Limit caffeine intake",
+      "Consult a healthcare professional"
+    ]
+  },
+
   "anxiety state": {
     "description": "A condition involving excessive worry, nervousness, or fear.",
     "advice": [

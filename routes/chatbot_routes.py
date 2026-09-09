@@ -1,10 +1,5 @@
-from flask import Blueprint
-from flask import request
-from flask import jsonify
-
-from services.chatbot_service import (
-    ask_chatbot
-)
+from flask import Blueprint, request, jsonify
+from services.chatbot_service import ask_chatbot
 
 chatbot_bp = Blueprint(
     "chatbot",
@@ -12,22 +7,15 @@ chatbot_bp = Blueprint(
     url_prefix="/chatbot"
 )
 
-@chatbot_bp.route(
-    "/ask",
-    methods=["POST"]
-)
+@chatbot_bp.route("/ask", methods=["POST"])
 def ask():
-
     data = request.get_json()
-
-    question = data.get(
-        "question"
-    )
+    question = data.get("question")
 
     answer = ask_chatbot(
-        question
+        question,
+        ip_address=request.remote_addr,
+        user_agent=request.headers.get("User-Agent", "")[:255]
     )
 
-    return jsonify({
-        "answer": answer
-    })
+    return jsonify({"answer": answer})

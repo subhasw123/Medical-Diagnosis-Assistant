@@ -1,5 +1,9 @@
 import joblib
 import numpy as np
+import warnings
+
+# Suppress sklearn UserWarning about lacking feature names
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn")
 
 model = joblib.load("ml/models/disease_model.pkl")
 encoder = joblib.load("ml/models/label_encoder.pkl")
@@ -19,18 +23,21 @@ def predict_top3(vector):
 
         disease = encoder.inverse_transform([idx])[0]
 
-        relative_confidence = round(
-            (probabilities[idx] / best_probability) * 100,
-            2
-        )
+        if best_probability > 0:
+            relative_confidence = round(
+                (probabilities[idx] / best_probability) * 100,
+                2
+            )
+        else:
+            relative_confidence = 0.0
 
         predictions.append({
             "disease": disease,
-            "confidence": relative_confidence,
-            "raw_probability": round(
+            "confidence": float(relative_confidence),
+            "raw_probability": float(round(
                 probabilities[idx] * 100,
                 2
-            )
+            ))
         })
 
     return predictions
