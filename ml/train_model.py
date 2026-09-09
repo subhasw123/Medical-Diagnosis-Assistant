@@ -27,15 +27,17 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
-# Train
+# Lightweight Random Forest
 model = RandomForestClassifier(
-    n_estimators=80,
-    max_depth=18,
-    min_samples_leaf=3,
+    n_estimators=50,
+    max_depth=15,
+    min_samples_leaf=4,
     max_features="sqrt",
     random_state=42,
     n_jobs=1
 )
+
+# Train
 model.fit(X_train, y_train)
 
 # Evaluate
@@ -47,6 +49,7 @@ accuracy = accuracy_score(
 )
 
 print("Accuracy:", accuracy)
+print("Accuracy percentage:", round(accuracy * 100, 2), "%")
 
 # Save model
 joblib.dump(
