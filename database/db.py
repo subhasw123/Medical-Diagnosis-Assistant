@@ -1,6 +1,7 @@
 import mysql.connector
 from config import Config
 
+
 def get_connection():
     print("HOST:", Config.MYSQL_HOST)
     print("PORT:", Config.MYSQL_PORT)
@@ -11,7 +12,8 @@ def get_connection():
         port=Config.MYSQL_PORT,
         user=Config.MYSQL_USER,
         password=Config.MYSQL_PASSWORD,
-        database=Config.MYSQL_DATABASE
+        database=Config.MYSQL_DATABASE,
+        ssl_disabled=False
     )
 
     cursor = connection.cursor()
