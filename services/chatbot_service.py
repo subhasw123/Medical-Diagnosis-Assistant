@@ -5,9 +5,8 @@ from database.db import get_connection
 
 load_dotenv()
 
-client = genai.Client(
-    api_key=os.getenv("API_KEY")
-)
+API_KEY = os.getenv("API_KEY") or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 
 def log_chatbot_interaction(question, answer, ip_address=None, user_agent=None):
@@ -28,6 +27,11 @@ def log_chatbot_interaction(question, answer, ip_address=None, user_agent=None):
 
 
 def ask_chatbot(question, ip_address=None, user_agent=None):
+    if not question or not str(question).strip():
+        return "Please ask a question about your symptoms or health concerns."
+
+    if client is None:
+        raise RuntimeError("Gemini API key is missing. Set API_KEY in your .env file.")
 
     prompt = f"""
 You are a medical assistant.
@@ -41,13 +45,15 @@ Add a disclaimer that this is not professional medical advice.
 """
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemini-3.6-flash",
         contents=prompt
     )
 
-    answer = response.text
+    answer = getattr(response, "text", None) or str(response)
+    if not answer or not str(answer).strip():
+        raise ValueError("Gemini returned an empty response.")
 
     # Log to DB asynchronously
     log_chatbot_interaction(question, answer, ip_address, user_agent)
 
-    return answer
+    return answer.strip()

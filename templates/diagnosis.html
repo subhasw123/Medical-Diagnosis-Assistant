@@ -51,17 +51,20 @@
         }
 
         [data-theme="light"] {
-            --surface-rgb: 0, 0, 0;
+            --surface-rgb: 255, 255, 255;
             --primary-rgb: 0, 150, 150;
             --secondary-rgb: 2, 132, 199;
-            
+
             --dark-bg: #f8fafc;
             --text-primary: #0f172a;
-            --card-bg: rgba(var(--surface-rgb), 0.03);
-            --card-border: rgba(var(--surface-rgb), 0.08);
+            --text-secondary: rgba(15, 23, 42, 0.72);
+            --text-muted: rgba(15, 23, 42, 0.56);
+            --card-bg: rgba(var(--surface-rgb), 0.82);
+            --card-border: rgba(15, 23, 42, 0.08);
             --shadow-glow: 0 0 40px rgba(var(--primary-rgb), 0.15);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 8px 32px rgba(15, 23, 42, 0.08);
             --navy: #e2e8f0;
+            color-scheme: light;
         }
 
         html { scroll-behavior: smooth; }
@@ -116,9 +119,14 @@
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 5%;
             height: 70px;
-            background: rgba(6,13,31,0.85);
+            background: rgba(var(--surface-rgb), 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--card-border);
+            box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+        }
+        [data-theme="light"] .navbar {
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
         }
         .nav-logo {
             display: flex; align-items: center; gap: 10px;
@@ -316,7 +324,7 @@
         /* floating badge */
         .float-badge {
             position: absolute; bottom: -16px; left: -24px;
-            background: rgba(6,13,31,0.9);
+            background: rgba(var(--surface-rgb), 0.9);
             backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-md); padding: 12px 16px;

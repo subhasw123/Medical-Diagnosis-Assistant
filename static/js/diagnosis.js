@@ -467,13 +467,21 @@ async function sendMessage() {
                 }
             );
 
-        const data =
-            await response.json();
+        let data = {};
+        try {
+            data = await response.json();
+        } catch (jsonError) {
+            data = {};
+        }
+
+        const answer =
+            data.answer ||
+            "Sorry, I couldn't connect to the AI service right now. Please try again in a moment.";
 
         chatBox.innerHTML += `
             <div style="margin-top:10px;">
                 <b>AI:</b>
-                ${data.answer || "No response"}
+                ${answer}
             </div>
             <hr>
         `;
