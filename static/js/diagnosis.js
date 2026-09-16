@@ -418,8 +418,6 @@ function removeSymptom(symptom) {
 
         checkbox.checked = false;
     }
-
-    updateSelectedSymptomsDisplay();
 }
 
 async function sendMessage() {
