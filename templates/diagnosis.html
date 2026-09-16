@@ -1119,9 +1119,12 @@
 // Symptom count badge
 const _origUpdateDisplay = updateSelectedSymptomsDisplay;
 function updateSelectedSymptomsDisplay() {
-    _origUpdateDisplay();
+    // Keep your existing display code here
+
     const cnt = document.getElementById('symptom-count');
-    if (cnt) cnt.textContent = selectedSymptoms.size;
+    if (cnt) {
+        cnt.textContent = selectedSymptoms.size;
+    }
 }
 
 // Loading state on submit

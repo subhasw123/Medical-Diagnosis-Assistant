@@ -415,9 +415,10 @@ function removeSymptom(symptom) {
         );
 
     if (checkbox) {
-
         checkbox.checked = false;
     }
+
+    updateSelectedSymptomsDisplay();
 }
 
 async function sendMessage() {
