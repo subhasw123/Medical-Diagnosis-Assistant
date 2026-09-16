@@ -1,17 +1,17 @@
 from database.db import get_connection
 
-def save_patient(full_name, age, gender):
+def save_patient(full_name, age, gender, user_id=None):
 
     conn = get_connection()
     cursor = conn.cursor()
 
     query = """
     INSERT INTO patients
-    (full_name, age, gender)
-    VALUES (%s, %s, %s)
+    (full_name, age, gender, user_id)
+    VALUES (%s, %s, %s, %s)
     """
 
-    values = (full_name, age, gender)
+    values = (full_name, age, gender, user_id)
 
     cursor.execute(query, values)
 

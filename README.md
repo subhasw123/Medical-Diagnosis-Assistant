@@ -29,3 +29,10 @@ A simple Flask-based medical diagnosis assistant scaffold.
    ```
 2. Create a `.env` file with database credentials.
 3. Initialize the database using `database/schema.sql` and `database/seed_data.sql`.
+
+## Patient Accounts
+
+Run `database/schema.sql` against the configured MySQL database before using registration.
+It creates the `users` table and adds the nullable `user_id` relationship to `patients` so
+existing diagnosis records remain valid. Patients can register at `/register`, sign in at
+`/login`, and view their own diagnosis history at `/history`.

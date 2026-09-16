@@ -834,8 +834,10 @@
         <a href="#chat-section">AI Chat</a>
         {% if is_admin %}
         <a href="/admin/dashboard">📊 Dashboard</a>
+        {% elif session.get('user_id') %}
+        <a href="/history">History</a>
         {% else %}
-        <a href="/admin/login">Login</a>
+        <a href="{{ url_for('auth.login') }}">Sign In</a>
         {% endif %}
         <a href="#features">About</a>
     </div>
@@ -845,8 +847,10 @@
         </button>
         {% if is_admin %}
         <a href="/admin/logout" class="nav-cta" style="background: linear-gradient(135deg,#7c3aed,#4f46e5);">🚪 Logout</a>
+        {% elif session.get('user_id') %}
+        <a href="{{ url_for('auth.logout') }}" class="nav-cta">🚪 Logout</a>
         {% else %}
-        <a href="#diagnosis-section" class="nav-cta">Start Diagnosis</a>
+        <a href="{{ url_for('auth.register') }}" class="nav-cta">Create Account</a>
         {% endif %}
     </div>
 </nav>
@@ -1086,7 +1090,12 @@
         <a href="/">Home</a>
         <a href="#diagnosis-section">Diagnosis</a>
         <a href="#chat-section">AI Chat</a>
-        <a href="/admin/login">Login</a>
+        {% if session.get('user_id') %}
+        <a href="/history">History</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('auth.login') }}">Sign In</a>
+        {% endif %}
     </div>
     <div>© 2025 MedAI. For educational use only.</div>
 </footer>

@@ -1,20 +1,20 @@
 from database.db import get_connection
 
 
-def save_patient(full_name, age, gender):
+def save_patient(full_name, age, gender, user_id=None):
 
     conn = get_connection()
     cursor = conn.cursor()
 
     query = """
     INSERT INTO patients
-    (full_name, age, gender)
-    VALUES (%s,%s,%s)
+    (full_name, age, gender, user_id)
+    VALUES (%s,%s,%s,%s)
     """
 
     cursor.execute(
         query,
-        (full_name, age, gender)
+        (full_name, age, gender, user_id)
     )
 
     conn.commit()
@@ -64,7 +64,7 @@ def save_diagnosis(
     conn.close()
 
 
-def get_history():
+def get_history(user_id):
 
     conn = get_connection()
 
@@ -88,10 +88,12 @@ def get_history():
     JOIN patients p
     ON p.patient_id = d.patient_id
 
+    WHERE p.user_id = %s
+
     ORDER BY d.diagnosis_date DESC
     """
 
-    cursor.execute(query)
+    cursor.execute(query, (user_id,))
 
     rows = cursor.fetchall()
 

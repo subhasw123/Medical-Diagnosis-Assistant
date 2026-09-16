@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign In | MedAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body>
+    <div class="auth-shell">
+        <header class="auth-nav">
+            <a class="brand" href="/"><span class="brand-mark">⌁</span>MedAI</a>
+            <nav class="nav-links"><a href="/">Home</a><a href="/#diagnosis-section">Diagnosis</a><a href="/#chat-section">AI Chat</a><a href="/admin/login">Admin</a><a href="/#features">About</a><a href="/#contact">Contact</a></nav>
+            <div class="nav-actions"><a class="nav-signin" href="{{ url_for('auth.login') }}">Sign in</a><a class="nav-start" href="{{ url_for('auth.register') }}">Start Diagnosis</a></div>
+        </header>
+        <main class="auth-main">
+            <section class="auth-copy">
+                <div class="eyebrow"><span>♧</span> Private &amp; secure account</div>
+                <h1>Your health workspace,<br><strong>personalised</strong></h1>
+                <p>Create a MedAI account to save your symptom checks, revisit past results and continue conversations with the assistant.</p>
+                <div class="benefit"><span>⌁</span> Save and revisit diagnosis reports</div>
+                <div class="benefit"><span>⌁</span> Personalised chat history</div>
+                <div class="benefit"><span>⌁</span> Your data stays private to you</div>
+            </section>
+            <section class="auth-card">
+                <div class="auth-tabs"><a class="active" href="{{ url_for('auth.login') }}">Sign in</a><a href="{{ url_for('auth.register') }}">Register</a></div>
+                <h2>Welcome back</h2>
+                <p class="intro">Sign in to continue to your health workspace.</p>
+                {% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="flash">{{ message }}</div>{% endfor %}{% endwith %}
+                <form class="auth-form" method="post">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+                    <button class="auth-submit" type="submit">Sign in</button>
+                </form>
+                <p class="auth-footer">New here? <a href="{{ url_for('auth.register') }}">Create an account</a></p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -73,7 +73,8 @@ class DiagnosisService:
         patient_id = save_patient(
             data.get('full_name'),
             data.get('age'),
-            data.get('gender')
+            data.get('gender'),
+            data.get('user_id')
         )
 
         best_prediction = predictions[0]

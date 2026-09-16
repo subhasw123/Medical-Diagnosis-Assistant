@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request, session
 from services.diagnosis_service import DiagnosisService
 from ml.load_symptoms import SYMPTOMS
 
@@ -16,5 +16,6 @@ def get_symptoms():
 @diagnosis_bp.route('/', methods=['POST'])
 def diagnose():
     data = request.get_json() or {}
+    data["user_id"] = session.get("user_id")
     result = service.diagnose(data)
     return jsonify(result)

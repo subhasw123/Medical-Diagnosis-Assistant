@@ -50,9 +50,11 @@
 <div class="header">
     <h1>Diagnosis History</h1>
 
-    <a href="/">
-        New Diagnosis
-    </a>
+    <div>
+        {% if user_email %}<span>{{ user_email }}</span>{% endif %}
+        <a href="/">New Diagnosis</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
 </div>
 
 <table>

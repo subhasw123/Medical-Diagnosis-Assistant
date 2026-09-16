@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 from routes.diagnosis_routes import diagnosis_bp
 from routes.chatbot_routes import chatbot_bp
 from routes.admin_routes import admin_bp
+from routes.auth_routes import auth_bp
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ app.secret_key = "medical_diagnosis_secret"
 app.register_blueprint(diagnosis_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(chatbot_bp)
+app.register_blueprint(auth_bp)
 
 
 @app.route("/")
@@ -20,6 +22,9 @@ def home():
     # instead of showing the public user view
     if "admin" in session:
         return redirect(url_for("admin.dashboard"))
+
+    if "user_id" not in session:
+        return redirect(url_for("auth.login"))
 
     return render_template("diagnosis.html", is_admin=False)
 
