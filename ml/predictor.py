@@ -1,15 +1,30 @@
+import os
 import joblib
 import numpy as np
 import warnings
 
-# Suppress sklearn UserWarning about lacking feature names
 warnings.filterwarnings(
     "ignore",
     category=UserWarning,
     module="sklearn"
 )
 
-# Model and encoder will be loaded only when needed
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "ml",
+    "models",
+    "disease_model.pkl"
+)
+
+ENCODER_PATH = os.path.join(
+    BASE_DIR,
+    "ml",
+    "models",
+    "label_encoder.pkl"
+)
+
 model = None
 encoder = None
 
@@ -18,27 +33,38 @@ def load_model():
 
     global model, encoder
 
-    if model is None or encoder is None:
+    if model is None:
+        print(f"Loading model from: {MODEL_PATH}")
 
-        print("Loading disease prediction model...")
+        if not os.path.exists(MODEL_PATH):
+            raise FileNotFoundError(
+                f"Model file not found: {MODEL_PATH}"
+            )
 
-        model = joblib.load(
-            "ml/models/disease_model.pkl"
-        )
-
-        encoder = joblib.load(
-            "ml/models/label_encoder.pkl"
-        )
+        model = joblib.load(MODEL_PATH)
 
         print("Disease prediction model loaded successfully.")
+
+    if encoder is None:
+        print(f"Loading encoder from: {ENCODER_PATH}")
+
+        if not os.path.exists(ENCODER_PATH):
+            raise FileNotFoundError(
+                f"Encoder file not found: {ENCODER_PATH}"
+            )
+
+        encoder = joblib.load(ENCODER_PATH)
+
+        print("Label encoder loaded successfully.")
 
 
 def predict_top3(vector):
 
-    # Load model only when prediction is requested
     load_model()
 
-    probabilities = model.predict_proba([vector])[0]
+    probabilities = model.predict_proba(
+        np.array([vector])
+    )[0]
 
     top_indices = np.argsort(probabilities)[-3:][::-1]
 
